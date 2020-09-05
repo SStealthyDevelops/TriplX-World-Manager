@@ -29,7 +29,7 @@ public class JSONManager {
             JSONObject oj = (JSONObject) new JSONParser().parse(new InputStreamReader(new FileInputStream(worldsFile)));
 
             if (oj == null) {
-                System.out.println("Failed to read worlds.json - ERROR CODE: 5x00001");
+                Debugger.debug(DebugLevel.CRITICAL, "Could not find JSON object in worlds.json...");
                 return;
             }
 
@@ -44,7 +44,7 @@ public class JSONManager {
                 String directory = object.get("directory").toString();
                 int playerLimit = Integer.parseInt(object.get("player-limit").toString());
 
-                TWorld world = new TWorld(name, directory, playerLimit, false);
+                TWorld world = new TWorld(name, directory, playerLimit, true);
                 WorldManager.getInstance().addWorld(world);
             }
 

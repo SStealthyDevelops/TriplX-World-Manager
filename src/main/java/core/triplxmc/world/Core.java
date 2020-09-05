@@ -64,10 +64,7 @@ public class Core extends JavaPlugin {
     @Override
     public void onDisable() {
         for (TWorld world : WorldManager.getInstance().getWorlds()) {
-            System.out.println(WorldManager.getInstance().getWorlds().size());
-            System.out.println(world.isPermanent());
             if (!world.isPermanent()) {
-                System.out.println("got here");
                 Bukkit.unloadWorld(world.getDirectory(), false);
                 FileManager.getInstance().delete(FileManager.getWorldFile(world.getDirectory()));
             }

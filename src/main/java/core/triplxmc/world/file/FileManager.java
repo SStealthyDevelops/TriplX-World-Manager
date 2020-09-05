@@ -55,17 +55,23 @@ public class FileManager {
     }
 
 
+    @SuppressWarnings("all")
     public void delete(File file){
-        if (file.isDirectory()) {
-            for (File subFile : file.listFiles()) {
-                if(subFile.isDirectory()) {
-                    delete(subFile);
-                } else {
-                    subFile.delete();
+        try {
+            if (file.isDirectory()) {
+                for (File subFile : file.listFiles()) {
+                    if(subFile.isDirectory()) {
+                        delete(subFile);
+                    } else {
+                        subFile.delete();
+                    }
                 }
             }
+            file.delete();
+        } catch (Exception e) {
+            Debugger.debug(DebugLevel.ERROR, "&cCould not delete file: " + file.getName());
+            e.printStackTrace();
         }
-        file.delete();
     }
 
 
