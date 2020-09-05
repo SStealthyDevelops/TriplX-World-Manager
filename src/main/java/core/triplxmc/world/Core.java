@@ -1,5 +1,6 @@
 package core.triplxmc.world;
 
+import core.triplxmc.world.api.WorldAPI;
 import core.triplxmc.world.commands.SubCommandManager;
 import core.triplxmc.world.commands.TWMCommand;
 import core.triplxmc.world.events.PlayerJoinQuit;
@@ -12,8 +13,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import triplx.core.api.chat.Color;
-
-import java.util.Objects;
 
 public class Core extends JavaPlugin {
 
@@ -59,6 +58,8 @@ public class Core extends JavaPlugin {
         registerListeners();
         SubCommandManager.init();
         getCommand("twm").setExecutor(new TWMCommand());
+
+        WorldAPI.setInstance(new WorldAPI());
     }
 
     @Override

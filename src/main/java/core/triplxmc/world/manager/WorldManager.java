@@ -4,6 +4,7 @@ import core.triplxmc.world.file.FileManager;
 import core.triplxmc.world.log.debug.DebugLevel;
 import core.triplxmc.world.log.debug.Debugger;
 import lombok.Getter;
+import org.bukkit.Bukkit;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,6 +30,15 @@ public class WorldManager {
         }
         worlds.add(world);
         FileManager.getInstance().createDirectory(world);
+    }
+
+    public void deleteWorld(String directory) {
+        if (Bukkit.getWorld(directory) == null)  {
+            Debugger.debug(DebugLevel.ERROR, "&cCould not find BWorld " + directory + "!");
+            return;
+        }
+        Bukkit.unloadWorld(directory, false);
+        FileManager.getInstance().delete(FileManager.getWorldFile(directory));
     }
 
 }
