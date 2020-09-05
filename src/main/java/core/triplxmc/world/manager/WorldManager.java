@@ -5,6 +5,7 @@ import core.triplxmc.world.log.debug.DebugLevel;
 import core.triplxmc.world.log.debug.Debugger;
 import lombok.Getter;
 import org.bukkit.Bukkit;
+import org.bukkit.World;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -39,6 +40,15 @@ public class WorldManager {
         }
         Bukkit.unloadWorld(directory, false);
         FileManager.getInstance().delete(FileManager.getWorldFile(directory));
+    }
+
+    public boolean isPersistent(World world) {
+        for (TWorld w : worlds) {
+            if (w.getDirectory().equals(world.getName())) {
+                return w.isPermanent();
+            }
+        }
+        return true;
     }
 
 }

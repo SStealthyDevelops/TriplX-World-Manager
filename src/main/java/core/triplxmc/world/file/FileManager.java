@@ -33,10 +33,8 @@ public class FileManager {
             Bukkit.getServer().unloadWorld(w, false);
 
             delete(Objects.requireNonNull(getWorldFile(world.getDirectory())));
-//
             copyFolder(Objects.requireNonNull(getWorldFile(world.getOriginal().getName())), getWorldFile(world.getDirectory()));
 
-//          Bukkit.getServer().getWorlds().add(w); does absolutely nothing
 
         Bukkit.getServer().createWorld(new WorldCreator(world.getDirectory()));
         } else {

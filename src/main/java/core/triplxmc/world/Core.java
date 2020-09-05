@@ -3,7 +3,6 @@ package core.triplxmc.world;
 import core.triplxmc.world.api.WorldAPI;
 import core.triplxmc.world.commands.SubCommandManager;
 import core.triplxmc.world.commands.TWMCommand;
-import core.triplxmc.world.events.PlayerJoinQuit;
 import core.triplxmc.world.file.FileManager;
 import core.triplxmc.world.file.JSONManager;
 import core.triplxmc.world.manager.TWorld;
@@ -74,7 +73,6 @@ public class Core extends JavaPlugin {
 
     private void registerListeners() {
         PluginManager pm = getServer().getPluginManager();
-        pm.registerEvents(new PlayerJoinQuit(), this);
     }
 
 
