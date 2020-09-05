@@ -7,7 +7,6 @@ import core.triplxmc.world.manager.TWorld;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Bukkit;
-import org.bukkit.Chunk;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
 
@@ -29,20 +28,24 @@ public class FileManager {
 
         delete(Objects.requireNonNull(getWorldFile(world.getDirectory())));
         Bukkit.getServer().createWorld(new WorldCreator(world.getDirectory()));
-        Bukkit.getServer().createChunkData(Bukkit.getServer().getWorld(world.getDirectory()));
-
         if (world.getOriginal() != null) {
             World w = Bukkit.getWorld(world.getDirectory());
-            for (Chunk c : w.getLoadedChunks()) {
-                w.unloadChunk(c);
-            }
-
-            Bukkit.getServer().unloadWorld(Bukkit.getWorld(world.getDirectory()), false);
+            Bukkit.getServer().unloadWorld(w, false);
 
             delete(Objects.requireNonNull(getWorldFile(world.getDirectory())));
-
+//
             copyFolder(Objects.requireNonNull(getWorldFile(world.getOriginal().getName())), getWorldFile(world.getDirectory()));
+
+//          Bukkit.getServer().getWorlds().add(w); does absolutely nothing
+
+        Bukkit.getServer().createWorld(new WorldCreator(world.getDirectory()));
+        } else {
+            if (Bukkit.getWorld(world.getDirectory()) == null) {
+                Bukkit.createWorld(new WorldCreator(world.getDirectory()));
+            }
+            Bukkit.getServer().createChunkData(Bukkit.getServer().getWorld(world.getDirectory()));
         }
+
     }
 
     public static File getWorldFile(String worldName) {
@@ -85,7 +88,7 @@ public class FileManager {
                 dest.mkdir();
             }
 
-            // list all the directory contents
+            // list all the directory contents\
             String files[] = src.list();
 
             if (files != null) {
@@ -94,6 +97,7 @@ public class FileManager {
                     File srcFile = new File(src, file);
                     File destFile = new File(dest, file);
                     //recursive copy
+                    if (!file.toString().contains("uid"))
                     copyFolder(srcFile, destFile);
                 }
             }
