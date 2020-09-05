@@ -1,0 +1,8 @@
+main: core.triplxmc.world.Core
+version: 1.0.0
+name: WORLD_MANAGER
+
+commands:
+  twm:
+    description: Manages the worlds.
+

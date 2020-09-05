@@ -1,0 +1,14 @@
+{
+
+  "worlds": [
+
+    {
+      "directory" : "test-world",
+      "name": "World 1",
+      "player-limit": -1
+    }
+
+
+  ]
+
+}
