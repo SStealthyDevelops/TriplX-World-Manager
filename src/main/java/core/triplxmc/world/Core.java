@@ -40,7 +40,7 @@ public class Core extends JavaPlugin {
 
         int i = 0;
         if (WorldManager.getInstance().getWorlds() == null || WorldManager.getInstance().getWorlds().size() == 0){
-            Bukkit.getConsoleSender().sendMessage(Color.cc("&cError >> No worlds to laod!"));
+            Bukkit.getConsoleSender().sendMessage(Color.cc("&cNo worlds to load!"));
             Bukkit.getConsoleSender().sendMessage("");
             Bukkit.getServer().getConsoleSender().sendMessage(Color.cc("&7|---------------- 0 WORLDS LOADED ---------------|"));
         } else {

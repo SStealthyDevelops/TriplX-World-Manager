@@ -39,7 +39,7 @@ public class FileManager {
 
             Bukkit.getServer().unloadWorld(Bukkit.getWorld(world.getDirectory()), false);
 
-            delete(Objects.requireNonNull(getWorldFile(world.getWorldName())));
+            delete(Objects.requireNonNull(getWorldFile(world.getDirectory())));
 
             copyFolder(Objects.requireNonNull(getWorldFile(world.getOriginal().getName())), getWorldFile(world.getDirectory()));
         }
@@ -75,7 +75,9 @@ public class FileManager {
     }
 
 
+
     @SuppressWarnings("ALL") private void copyFolder(File src, File dest) throws IOException {
+
         if (src.isDirectory()) {
 
             //if directory not exists, create it
