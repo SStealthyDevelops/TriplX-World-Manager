@@ -10,7 +10,7 @@ public class PlayerJoinQuit implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
-        e.getPlayer().teleport(new Location(Bukkit.getWorld("test-world"), 0, 90, 0));
+        e.getPlayer().teleport(new Location(Bukkit.getWorld("test"), 0, 90, 0));
     }
 
 }

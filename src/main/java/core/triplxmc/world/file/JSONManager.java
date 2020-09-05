@@ -44,7 +44,7 @@ public class JSONManager {
                 String directory = object.get("directory").toString();
                 int playerLimit = Integer.parseInt(object.get("player-limit").toString());
 
-                TWorld world = new TWorld(name, directory, playerLimit);
+                TWorld world = new TWorld(name, directory, playerLimit, false);
                 WorldManager.getInstance().addWorld(world);
             }
 

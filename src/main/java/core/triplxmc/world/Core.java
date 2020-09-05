@@ -13,6 +13,8 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import triplx.core.api.chat.Color;
 
+import java.util.Objects;
+
 public class Core extends JavaPlugin {
 
     @Getter
@@ -61,7 +63,15 @@ public class Core extends JavaPlugin {
 
     @Override
     public void onDisable() {
-
+        for (TWorld world : WorldManager.getInstance().getWorlds()) {
+            System.out.println(WorldManager.getInstance().getWorlds().size());
+            System.out.println(world.isPermanent());
+            if (!world.isPermanent()) {
+                System.out.println("got here");
+                Bukkit.unloadWorld(world.getDirectory(), false);
+                FileManager.getInstance().delete(FileManager.getWorldFile(world.getDirectory()));
+            }
+        }
     }
 
     private void registerListeners() {

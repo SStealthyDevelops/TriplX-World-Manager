@@ -55,20 +55,19 @@ public class FileManager {
     }
 
 
-    private void delete(File delete){
-        if (delete.isDirectory()) {
-            String[] files = delete.list();
-
-            if (files != null) {
-                for (String file : files) {
-                    File toDelete = new File(file);
-                    delete(toDelete);
+    public void delete(File file){
+        if (file.isDirectory()) {
+            for (File subFile : file.listFiles()) {
+                if(subFile.isDirectory()) {
+                    delete(subFile);
+                } else {
+                    subFile.delete();
                 }
             }
-        } else {
-            delete.delete();
         }
+        file.delete();
     }
+
 
     @SuppressWarnings("ALL") private void copyFolder(File src, File dest) throws IOException {
         if (src.isDirectory()) {
